@@ -225,14 +225,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:54</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Add a new scan</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -297,14 +299,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:42</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Fetch a specific scan.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -369,14 +373,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="92"
-                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:92</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:114</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Get the types of scans</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
@@ -410,14 +416,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:27</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Get all of the user&#39;s scans.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -482,14 +490,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="83"
-                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:83</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="102"
+                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:102</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Delete an existing scan</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -554,14 +564,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:63</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/scan-tracking/scan-tracking.service.ts:78</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Update an existing scan</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -642,9 +654,12 @@ export class ScanTrackingService {
     private usersRepository: Repository&lt;Users&gt;,
   ) {}
 
+  /**
+   * Get all of the user&#x27;s scans.
+   * @param userId
+   */
   async fetchUserScans(userId: number): Promise&lt;any&gt; {
     try {
-      // Get all of the user&#x27;s scans.
       return await this.scanRepository
         .createQueryBuilder()
         .where(&#x27;user_id &#x3D; :userId&#x27;, { userId })
@@ -654,15 +669,22 @@ export class ScanTrackingService {
     }
   }
 
+  /**
+   * Fetch a specific scan.
+   * @param scanId
+   */
   async fetchScanById(scanId: number): Promise&lt;any&gt; {
     try {
-      // Fetch a user&#x27;s specific scan.
       return await this.scanRepository.findOne(scanId);
     } catch (e) {
       e.printStackTrace;
     }
   }
 
+  /**
+   * Add a new scan
+   * @param scanDTO
+   */
   async addScan(scanDTO: ScanDTO): Promise&lt;any&gt; {
     try {
       // Get the scan details from the DTO
@@ -682,6 +704,11 @@ export class ScanTrackingService {
     }
   }
 
+  /**
+   * Update an existing scan
+   * @param scanId
+   * @param scanDTO
+   */
   async updateScan(scanId: number, scanDTO: ScanDTO): Promise&lt;any&gt; {
     try {
       // Get the updated scan details from the DTO
@@ -702,6 +729,10 @@ export class ScanTrackingService {
     }
   }
 
+  /**
+   * Delete an existing scan
+   * @param scanId
+   */
   async removeScan(scanId: number): Promise&lt;any&gt; {
     try {
       // Delete the scan, using its Id.
@@ -711,6 +742,9 @@ export class ScanTrackingService {
     }
   }
 
+  /**
+   * Get the types of scans
+   */
   async fetchScanTypes(): Promise&lt;any&gt; {
     try {
       // Fetch all of the scan type options.
